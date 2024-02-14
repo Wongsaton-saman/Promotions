@@ -1,5 +1,6 @@
 # Promotions
 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,11 +9,11 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-image: url('file:///C:/Users/Asus/Desktop/image/9658.jpg_wh860.jpg'); /* กำหนด URL ของรูปภาพพื้นหลังที่คุณต้องการใช้ */
+            background-image: url('file:///C:/Users/Asus/Desktop/image/9658.jpg_wh860.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            height: 100vh; /* ทำให้พื้นที่ของพื้นหลังเต็มหน้าจอ */
+            height: 100vh;
             margin: 0;
             display: flex;
             justify-content: center;
@@ -21,7 +22,7 @@
         form {
             max-width: 400px;
             padding: 20px;
-            background-color: rgba(255, 255, 255, 0.8); /* ใส่สีพื้นหลังในรูปแบบสีขาวโปร่งให้แสดงรายละเอียดของแบบฟอร์มได้ชัดเจน */
+            background-color: rgba(255, 255, 255, 0.8);
             border-radius: 8px;
         }
         label {
@@ -68,49 +69,37 @@
     <script>
         const form = document.getElementById('laundryForm');
         form.addEventListener('submit', function(event) {
-            event.preventDefault(); // หยุดการส่งฟอร์มแบบปกติ
-            const formData = new FormData(form); // เก็บข้อมูลจากฟอร์ม
+            event.preventDefault();
+            const formData = new FormData(form);
             const jsonData = {};
             formData.forEach((value, key) => {
                 jsonData[key] = value;
             });
-            const jsonDataString = JSON.stringify(jsonData); // เปลี่ยนข้อมูลเป็น JSON
-            console.log(jsonDataString);
-            // ส่งข้อมูลไปยังเซิร์ฟเวอร์หรือประมวลผลข้อมูลต่อไป
-            const form = document.getElementById('laundryForm');
-form.addEventListener('submit', function(event) {
-    event.preventDefault();
-    const formData = new FormData(form);
-    const jsonData = {};
-    formData.forEach((value, key) => {
-        jsonData[key] = value;
-    });
-    const jsonDataString = JSON.stringify(jsonData);
+            const jsonDataString = JSON.stringify(jsonData);
 
-    // ส่งข้อมูลไปยังไลน์
-    const url = 'https://notify-api.line.me/api/notify';
-    const token = 'VK8c27ajMlBR1mPijjHELLWO2VQNw1YLnbGKs4KRoIE'; // ใส่ LINE Notify Token ของคุณที่นี่
-    const message = jsonDataString;
+            // ส่งข้อมูลไปยังไลน์
+            const url = 'https://notify-api.line.me/api/notify';
+            const token = 'GgkljeV4z3t1CtIr76cb1ONJ5PLsUtbqV9FzVEPOPkq'; // ใส่ LINE Notify Token ของคุณที่นี่
+            const message = jsonDataString;
 
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': `Bearer ${token}`
-        },
-        body: `message=${message}`
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => console.log(data))
-    .catch(error => console.error('There was an error with the fetch operation:', error));
-});
-
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: `message=${message}`
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => console.log(data))
+            .catch(error => console.error('There was an error with the fetch operation:', error));
         });
     </script>
 </body>
 </html>
+
