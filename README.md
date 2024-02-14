@@ -77,6 +77,39 @@
             const jsonDataString = JSON.stringify(jsonData); // เปลี่ยนข้อมูลเป็น JSON
             console.log(jsonDataString);
             // ส่งข้อมูลไปยังเซิร์ฟเวอร์หรือประมวลผลข้อมูลต่อไป
+            const form = document.getElementById('laundryForm');
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const formData = new FormData(form);
+    const jsonData = {};
+    formData.forEach((value, key) => {
+        jsonData[key] = value;
+    });
+    const jsonDataString = JSON.stringify(jsonData);
+
+    // ส่งข้อมูลไปยังไลน์
+    const url = 'https://notify-api.line.me/api/notify';
+    const token = 'VK8c27ajMlBR1mPijjHELLWO2VQNw1YLnbGKs4KRoIE'; // ใส่ LINE Notify Token ของคุณที่นี่
+    const message = jsonDataString;
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': `Bearer ${token}`
+        },
+        body: `message=${message}`
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => console.log(data))
+    .catch(error => console.error('There was an error with the fetch operation:', error));
+});
+
         });
     </script>
 </body>
